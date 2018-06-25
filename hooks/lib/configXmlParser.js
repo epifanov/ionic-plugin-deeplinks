@@ -64,11 +64,12 @@ function getXmlDeeplinksPlugin(configXml) {
  */
 function getDeeplinkHostFromDeeplinksConfig(xmlDeeplinksPlugin) {
   var xmlDeeplinksPluginVariables = xmlDeeplinksPlugin['variable'];
-  var deeplinkHost = null;
+  var deeplinkHost = [];
   xmlDeeplinksPluginVariables && xmlDeeplinksPluginVariables.forEach(function(xmlElement) {
-    if (xmlElement.$.name === 'DEEPLINK_HOST') {
-      deeplinkHost = xmlElement.$.value;
-    }
+   var elementsName = xmlElement.$.name;
+   if (elementsName.indexOf('_HOST') !== -1 && xmlElement.$.value.trim() !== '') {
+     deeplinkHost.push(xmlElement.$.value);
+   }
   });
   return deeplinkHost;
 }

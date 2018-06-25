@@ -109,13 +109,15 @@ function injectDeeplinkHost(currentEntitlements, deeplinkHost) {
  * @param {Object} pluginPreferences - list of hosts from conig.xml
  * @return {Object} associated-domains dictionary content
  */
-function generateAssociatedDomainsContent(deeplinkHost) {
-  var domainsList = [];
-
-  domainsList.push(domainsListEntryForHost(deeplinkHost));
-
-  return domainsList;
-}
+ function generateAssociatedDomainsContent(deeplinkHost) {
+   var domainsList = [];
+   deeplinkHost.forEach(host => {
+     if (host.trim() !== '') {
+       domainsList.push(domainsListEntryForHost(host));
+     }
+   });
+   return domainsList;
+ }
 
 /**
  * Generate domain record for the given host.
